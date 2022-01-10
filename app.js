@@ -69,7 +69,14 @@ loadQuestion();
 function loadQuestion() {
   quiz.isCorrect = false;
   if (quiz.isFinish()) {
-    showScore();
+    swal({
+      title: "Quiz Over",
+      text: "Congratulations",
+      icon: "success",
+      button: "Show Score!",
+    }).then(function () {
+      showScore();
+    });
   } else {
     let question = quiz.getQuestion();
     let choises = question.choises;
@@ -114,7 +121,7 @@ function guess(id, answer) {
 
 function showScore() {
   quiz.questionIndex = 0;
-  let html = `<h2>Score</h2> <h4>${quiz.score}</h4>`;
+  let html = `<h2>Score</h2> <h4>${quiz.score} of ${quiz.questions.length}</h4>`;
   let htmlEx = document.querySelector(".card-body").innerHTML;
   document.querySelector(".card-body").innerHTML = html;
   let btn = document.createElement("button");
